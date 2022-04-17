@@ -57,16 +57,16 @@ Shader::Shader(const char* vertPath, const char* fragPath) {
     std::string vertStr = readFile(vertPath);
     std::string fragStr = readFile(fragPath);
     
-    const char* test1 = vertStr.c_str();
-    const char* test2 = fragStr.c_str();
+    const char* vertCStr = vertStr.c_str();
+    const char* fragCStr = fragStr.c_str();
 
     // Create shader objects
     GLuint vertShader = glCreateShader(GL_VERTEX_SHADER);
     GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
 
     // Compile shaders
-    glShaderSource(vertShader, 1, &test1, NULL);
-    glShaderSource(fragShader, 1, &test2, NULL);
+    glShaderSource(vertShader, 1, &vertCStr, NULL);
+    glShaderSource(fragShader, 1, &fragCStr, NULL);
     glCompileShader(vertShader);
     glCompileShader(fragShader);
 

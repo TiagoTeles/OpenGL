@@ -3,7 +3,7 @@ CC = g++
 LD = g++
 
 # Compiler Flags
-CCFLAGS += -g -O0 -std=c++17 
+CCFLAGS += -g -O3 -std=c++17 
 CCFLAGS += -Wall -Wextra -Wpedantic
 
 # GLAD
@@ -16,7 +16,7 @@ LDFLAGS += -L $(LIB)/GLFW/lib-mingw-w64
 LDFLAGS += -lglfw3 -lopengl32 -lgdi32
 
 # Directories
-SRC = $(wildcard src/*.cpp)
+SRC = $(wildcard src/*.cpp) $(wildcard src/GFX/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 BIN = bin
 LIB = lib
@@ -35,4 +35,5 @@ main: $(OBJ)
 
 clean:
 	@powershell "rm src/*.o"
+	@powershell "rm src/GFX/*.o"
 	@powershell "rm lib/GLAD/src/*.o"

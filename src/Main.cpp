@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "EBO.h"
-#include "Shader.h"
-#include "VAO.h"
-#include "VBO.h"
-#include "Window.h"
+#include "GFX/EBO.h"
+#include "GFX/Shader.h"
+#include "GFX/VAO.h"
+#include "GFX/VBO.h"
+#include "GFX/Window.h"
 
 #define UNUSED(X) (void)(X)
 
-#define N 128
+#define N 256
 #define ITER 16
 
 #define INDEX(X, Y) ((Y) * N + (X))
@@ -30,10 +30,13 @@ int main(int argc, char** argv) {
     UNUSED(argv);
 
     // Physical Quantities
-    float diff = 1E-6;      // Diffusivity, [m^2/s]
-    float velocity = 0.01;  // Velocity, [m/s]
+    // float diff = 1E-7;      // Diffusivity, [m^2/s]
+    // float velocity = 0.001; // Velocity, [m/s]
     float size = 0.01f;     // Length, [m]
     float time = 0.00f;     // Elapsed Time, [s]
+
+    float velocity = 0.0f;
+    float diff = 0.0f;
 
     // Discretizations
     float dx = size / N;
@@ -91,17 +94,6 @@ int main(int argc, char** argv) {
 
         // Swap buffers
         SWAP(rho, rho0);
-
-        // Apply B.C.
-        for (int x = 0; x < N; x++) {
-            rho[INDEX(x,   0)] = 100.0f * sin(0.1f*x) * sin(0.1f*0) * cos(time);
-            rho[INDEX(x, N-1)] = 100.0f * sin(0.1f*x) * sin(0.1f*N) * cos(time);
-        }
-
-        for (int y = 0; y < N; y++) {
-            rho[INDEX(  0, y)] = 100.0f * sin(0.1f*0) * sin(0.1f*y) * cos(time);
-            rho[INDEX(N-1, y)] = 100.0f * sin(0.1f*N) * sin(0.1f*y) * cos(time);
-        }
 
         // Run simulation
         for (int i = 0; i < ITER; i++) {
@@ -213,9 +205,9 @@ int main(int argc, char** argv) {
         glDrawElements(GL_TRIANGLES, 6*N*N, GL_UNSIGNED_INT, (const void*) 0);
         glfwSwapBuffers(window.window);
 
-        // // Print FPS
-        // printf("FPS: %.2f\n\n", 1.0f / (glfwGetTime() - lastTime));
-        // lastTime = glfwGetTime();
+        // Print FPS
+        printf("FPS: %.2f\n\n", 1.0f / (glfwGetTime() - lastTime));
+        lastTime = glfwGetTime();
     }
 
     // Free Memory
