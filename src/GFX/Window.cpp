@@ -48,7 +48,7 @@ Window::Window(int width, int height, const char* name) {
     }
 
     // Enable VSync
-    glfwSwapInterval(1);
+    glfwSwapInterval(0);
 
     // Error Callbacks
     glfwSetErrorCallback(errorCallback);
@@ -79,4 +79,10 @@ void Window::UpdateMouse() {
     for (int i = 0; i < GLFW_MOUSE_BUTTON_LAST; i++) {
         mouse.buttons[i] = glfwGetMouseButton(window, i);
     }
+}
+
+void Window::UpdateFPS() {
+        sprintf(title, "FPS: %.2f\n",  1.0f / (glfwGetTime() - lastFrame));
+        glfwSetWindowTitle(window, title);
+        lastFrame = glfwGetTime();
 }

@@ -17,6 +17,10 @@ struct Mouse {
 class Window {
    public:
     GLFWwindow* window;
+    char title[16];
+    double lastFrame;
+
+    // Input Devices
     Keyboard keyboard;
     Mouse mouse;
 
@@ -27,6 +31,9 @@ class Window {
     // Update input devices
     void UpdateKeyboard();
     void UpdateMouse();
+
+    // Update FPS
+    void UpdateFPS();
 };
 
 #endif
