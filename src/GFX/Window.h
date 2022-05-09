@@ -18,7 +18,7 @@ class Window {
    public:
     GLFWwindow* window;
     char title[16];
-    double lastFrame;
+    double time;
 
     // Input Devices
     Keyboard keyboard;
@@ -33,7 +33,7 @@ class Window {
     void UpdateMouse();
 
     // Update FPS
-    void UpdateFPS();
+    void UpdateTitle();
 };
 
 #endif

@@ -81,8 +81,8 @@ void Window::UpdateMouse() {
     }
 }
 
-void Window::UpdateFPS() {
-        sprintf(title, "FPS: %.2f\n",  1.0f / (glfwGetTime() - lastFrame));
+void Window::UpdateTitle() {
+        sprintf(title, "FPS: %.2f\n",  1.0f / (glfwGetTime() - time));
         glfwSetWindowTitle(window, title);
-        lastFrame = glfwGetTime();
+        time = glfwGetTime();
 }
