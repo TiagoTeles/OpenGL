@@ -8,7 +8,7 @@
 
 #include <glad/glad.h>
 
-std::string readFile(const char* path) {
+static std::string readFile(const char* path) {
 
     // Open file
     std::ifstream file(path, std::ios::binary);
@@ -33,7 +33,7 @@ std::string readFile(const char* path) {
     return shader;
 }
 
-void logError(GLuint ID) {
+static void logError(GLuint ID) {
     int length;
 
     // Get error length
