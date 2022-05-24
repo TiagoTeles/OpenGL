@@ -1,0 +1,17 @@
+#version 460 core
+
+layout(local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
+
+layout(std430, binding = 0) buffer Data {
+    float data[];
+};
+
+uniform int size_x;
+uniform int size_y;
+
+void main() {
+    uint x = gl_GlobalInvocationID.x;
+    uint y = gl_GlobalInvocationID.y;
+
+    data[y*size_x + x] = sqrt(pow(float(x)/float(size_x), 2) + pow(float(y)/float(size_y), 2));
+}
